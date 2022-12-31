@@ -59,7 +59,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalIncludeDirectories>..\..\..\Dependencies\glad\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Core\ExtraX\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -76,7 +76,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>..\..\..\Dependencies\glad\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Core\ExtraX\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -89,14 +89,8 @@
     <ClCompile Include="Test01.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Dependencies\glad\glad.vcxproj">
-      <Project>{362d3931-3f46-4010-bd36-3e38cec4a06a}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Dependencies\glfw\glfw.vcxproj">
-      <Project>{5525a8ea-10d9-427f-bbcc-ffcc6b6863f8}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Dependencies\imgui\imgui.vcxproj">
-      <Project>{a6e72b4b-e285-4bd4-93a0-5f887fae6cab}</Project>
+    <ProjectReference Include="..\..\Core\ExtraX\ExtraX.vcxproj">
+      <Project>{e0a149d4-f776-4d76-a16b-8c25d7940f1c}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
