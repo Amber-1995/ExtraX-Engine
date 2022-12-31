@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "glfw", "Dependencies\glfw\glfw.vcxproj", "{5525A8EA-10D9-427F-BBCC-FFCC6B6863F8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{76B0178A-CD85-47FE-9769-6C8BCB9000C9}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "glad", "Dependencies\glad\glad.vcxproj", "{362D3931-3F46-4010-BD36-3E38CEC4A06A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "imgui", "Dependencies\imgui\imgui.vcxproj", "{A6E72B4B-E285-4BD4-93A0-5F887FAE6CAB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5525A8EA-10D9-427F-BBCC-FFCC6B6863F8}.Debug|x64.ActiveCfg = Debug|x64
+		{5525A8EA-10D9-427F-BBCC-FFCC6B6863F8}.Debug|x64.Build.0 = Debug|x64
+		{5525A8EA-10D9-427F-BBCC-FFCC6B6863F8}.Release|x64.ActiveCfg = Release|x64
+		{5525A8EA-10D9-427F-BBCC-FFCC6B6863F8}.Release|x64.Build.0 = Release|x64
+		{362D3931-3F46-4010-BD36-3E38CEC4A06A}.Debug|x64.ActiveCfg = Debug|x64
+		{362D3931-3F46-4010-BD36-3E38CEC4A06A}.Debug|x64.Build.0 = Debug|x64
+		{362D3931-3F46-4010-BD36-3E38CEC4A06A}.Release|x64.ActiveCfg = Release|x64
+		{362D3931-3F46-4010-BD36-3E38CEC4A06A}.Release|x64.Build.0 = Release|x64
+		{A6E72B4B-E285-4BD4-93A0-5F887FAE6CAB}.Debug|x64.ActiveCfg = Debug|x64
+		{A6E72B4B-E285-4BD4-93A0-5F887FAE6CAB}.Debug|x64.Build.0 = Debug|x64
+		{A6E72B4B-E285-4BD4-93A0-5F887FAE6CAB}.Release|x64.ActiveCfg = Release|x64
+		{A6E72B4B-E285-4BD4-93A0-5F887FAE6CAB}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5525A8EA-10D9-427F-BBCC-FFCC6B6863F8} = {76B0178A-CD85-47FE-9769-6C8BCB9000C9}
+		{362D3931-3F46-4010-BD36-3E38CEC4A06A} = {76B0178A-CD85-47FE-9769-6C8BCB9000C9}
+		{A6E72B4B-E285-4BD4-93A0-5F887FAE6CAB} = {76B0178A-CD85-47FE-9769-6C8BCB9000C9}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {05A3FB5E-0AB6-4FEE-B4FE-F07F538C86E5}
+	EndGlobalSection
+EndGlobal
