@@ -5,7 +5,7 @@
 
 namespace ExtraX
 {
-	enum class EVEVT_TYPE
+	enum class EVENT_TYPE
 	{
 		None = 0,
 		WindowClose, WindowResize, WindowFocus, WindowLostFocus, WindowMoved,
@@ -15,10 +15,59 @@ namespace ExtraX
 	};
 
 
-	template<EVEVT_TYPE>
+	template<EVENT_TYPE>
 	class Event
 	{
 
+	};
+
+	template<>
+	class Event<EVENT_TYPE::KeyDown>
+	{
+	public:
+		int keycode;
+
+		Event(int keycode) :
+			keycode(keycode)
+		{
+		}
+	};
+
+	template<>
+	class Event<EVENT_TYPE::KeyUp>
+	{
+	public:
+		int keycode;
+
+		Event(int keycode) :
+			keycode(keycode)
+		{
+		}
+	};
+
+	template<>
+	class Event<EVENT_TYPE::MouseMoved>
+	{
+	public:
+		int x,y;
+
+		Event(int x, int y) :
+			x(x),
+			y(y)
+		{
+		}
+	};
+
+	template<>
+	class Event<EVENT_TYPE::MouseScrolled>
+	{
+	public:
+		int scroll_wheel;
+
+		Event(int scroll_wheel) :
+			scroll_wheel(scroll_wheel)
+		{
+		}
 	};
 
 
