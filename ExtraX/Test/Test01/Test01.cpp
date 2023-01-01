@@ -1,34 +1,33 @@
 #include <ExtraX/Events/EventManager.h>
-#include <iostream>
+#include <ExtraX/Log.h>
+#include <ExtraX/Graphics.h>
+#include <ExtraX/Input.h>
+#include <ExtraX/Init.h>
 
 using namespace ExtraX;
 
-class A
-{
-public:
-	int a = 10000;
+using namespace ExtraX::Graphics;
 
-	void fun()
-	{
-		std::cout << a << std::endl;
-	}
-};
+
 
 int main()
 {
-	A* a = new A();
-
-	Event<EVEVT_TYPE::None> e;
-
-	EventFuncion<EVEVT_TYPE::None> f1 = MakeEventFuncion<EVEVT_TYPE::None>(&A::fun, a);
-	EventFuncion<EVEVT_TYPE::None> f2 = MakeEventFuncion<EVEVT_TYPE::None>(&A::fun, a);
+	Init();
+	
+	Window* window = GetSingleton<Window>();
+	Context* context = GetSingleton<Context>();
 
 
+	while (!window->ShouldClose())
+	{
+		window->FrameBegin();
+		context->ClearColor(0.2f, 0.3f, 0.4f, 1.0f);
+		context->Clear(GL_COLOR_BUFFER_BIT);
+		
 
-	EventManager::BindEvent<EVEVT_TYPE::None>(f1);
-	EventManager::BindEvent<EVEVT_TYPE::None>(f2);
+		context->SwapBuffers();
+		window->FrameEnd();
+	}
 
-	f1.reset();
-
-	EventManager::OnEvent<EVEVT_TYPE::None>(e);
+	
 }
