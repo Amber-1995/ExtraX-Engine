@@ -59,7 +59,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalIncludeDirectories>C:\Users\Amber\Desktop\Github\ExtraX-Engine\ExtraX\Core\ExtraX\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Core\ExtraX\src;$(SolutionDir)\..\Dependencies\spdlog\include;$(SolutionDir)\..\Dependencies\glad\include;$(SolutionDir)\..\Dependencies\glfw\include;$(SolutionDir)\..\Dependencies\glm;$(SolutionDir)\..\Dependencies\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -76,7 +76,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>C:\Users\Amber\Desktop\Github\ExtraX-Engine\ExtraX\Core\ExtraX\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Core\ExtraX\src;$(SolutionDir)\..\Dependencies\spdlog\include;$(SolutionDir)\..\Dependencies\glad\include;$(SolutionDir)\..\Dependencies\glfw\include;$(SolutionDir)\..\Dependencies\glm;$(SolutionDir)\..\Dependencies\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -89,8 +89,49 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\ExtraX\Assert.h" />
+    <ClInclude Include="src\ExtraX\Common.h" />
+    <ClInclude Include="src\ExtraX\DefaultSettings.h" />
+    <ClInclude Include="src\ExtraX\ExtraX.h" />
     <ClInclude Include="src\ExtraX\Events\Event.h" />
     <ClInclude Include="src\ExtraX\Events\EventManager.h" />
+    <ClInclude Include="src\ExtraX\Graphics.h" />
+    <ClInclude Include="src\ExtraX\Graphics\Context.h" />
+    <ClInclude Include="src\ExtraX\Graphics\Context\ContextBase.h" />
+    <ClInclude Include="src\ExtraX\Graphics\Context\OpenGL.h" />
+    <ClInclude Include="src\ExtraX\Graphics\Shader.h" />
+    <ClInclude Include="src\ExtraX\Graphics\Shader\OpenGLShader.h" />
+    <ClInclude Include="src\ExtraX\Graphics\Shader\ShaderBase.h" />
+    <ClInclude Include="src\ExtraX\Graphics\Window.h" />
+    <ClInclude Include="src\ExtraX\Graphics\Window\GLFWWindow.h" />
+    <ClInclude Include="src\ExtraX\Graphics\Window\Win32Window.h" />
+    <ClInclude Include="src\ExtraX\Graphics\Window\WindowBase.h" />
+    <ClInclude Include="src\ExtraX\Init.h" />
+    <ClInclude Include="src\ExtraX\Input.h" />
+    <ClInclude Include="src\ExtraX\Log.h" />
+    <ClInclude Include="src\ExtraX\Mathematics.h" />
+    <ClInclude Include="src\ExtraX\Mathematics\Color\ColorBase.h" />
+    <ClInclude Include="src\ExtraX\Mathematics\GLMMathematics.h" />
+    <ClInclude Include="src\ExtraX\Mathematics\Matrix\GLMMatrix.h" />
+    <ClInclude Include="src\ExtraX\Mathematics\Matrix\MatrixBase.h" />
+    <ClInclude Include="src\ExtraX\Mathematics\Quaternion\GLMQuternion.h" />
+    <ClInclude Include="src\ExtraX\Mathematics\Quaternion\QuaternionBase.h" />
+    <ClInclude Include="src\ExtraX\Mathematics\Swizzle.h" />
+    <ClInclude Include="src\ExtraX\Mathematics\Vector\GLMVector.h" />
+    <ClInclude Include="src\ExtraX\Mathematics\Vector\VectorBase.h" />
+    <ClInclude Include="src\ExtraX\ResourceManager.h" />
+    <ClInclude Include="src\ExtraX\Singleton.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Dependencies\glad\glad.vcxproj">
+      <Project>{362d3931-3f46-4010-bd36-3e38cec4a06a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Dependencies\glfw\glfw.vcxproj">
+      <Project>{5525a8ea-10d9-427f-bbcc-ffcc6b6863f8}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Dependencies\imgui\imgui.vcxproj">
+      <Project>{a6e72b4b-e285-4bd4-93a0-5f887fae6cab}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
