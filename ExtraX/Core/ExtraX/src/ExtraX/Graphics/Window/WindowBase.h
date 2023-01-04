@@ -3,19 +3,16 @@
 #define EXTRAX_WINDOW_BASE_H
 
 #include <ExtraX/Common.h>
-#include <ExtraX/Events/EventManager.h>
-#include <ExtraX/Assert.h>
-#include <ExtraX/Input.h>
 
 namespace ExtraX::Graphics::Base
 {
-	constexpr int WINDOW_WIDTH = 800;
+	inline constexpr int WINDOW_WIDTH = 800;
 
-	constexpr int WINDOW_HEIGHT = 600;
+	inline constexpr int WINDOW_HEIGHT = 600;
 
-	constexpr int TITLE_MAX = 128;
+	inline constexpr int TITLE_MAX = 128;
 
-	const char* DEFAULT_TITLE = "ExtraX";
+	inline const char* DEFAULT_TITLE = "ExtraX";
 
 	class WindowBase
 	{
