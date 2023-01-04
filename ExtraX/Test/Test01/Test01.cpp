@@ -1,33 +1,31 @@
-#include <ExtraX/Events/EventManager.h>
-#include <ExtraX/Log.h>
-#include <ExtraX/Graphics.h>
-#include <ExtraX/Input.h>
-#include <ExtraX/Init.h>
+#include "ExtraX.h"
+
 
 using namespace ExtraX;
-
 using namespace ExtraX::Graphics;
 
 
 
 int main()
 {
-	Init();
-	
+	Initializer::Init();
+
 	Window* window = GetSingleton<Window>();
 	Context* context = GetSingleton<Context>();
-
-
+	
 	while (!window->ShouldClose())
 	{
 		window->FrameBegin();
-		context->ClearColor(0.2f, 0.3f, 0.4f, 1.0f);
-		context->Clear(GL_COLOR_BUFFER_BIT);
-		
+		context->Clear();
+		context->ClearColor(0.1f, 0.2f, 0.3f, 1.0f);
+
+		if (Input::GetKeyDown(KeyCode::A))
+		{
+			XX_INFO("23333");
+		}
+
 
 		context->SwapBuffers();
 		window->FrameEnd();
 	}
-
-	
 }
