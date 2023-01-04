@@ -2,6 +2,9 @@
 #ifndef EXTRAX_RESOURCE_MANAGER_H
 #define EXTRAX_RESOURCE_MANAGER_H
 
+#include <unordered_map>
+#include <string.h>
+
 namespace ExtraX
 {
 	template<typename RESOURCE>
@@ -16,8 +19,6 @@ namespace ExtraX
 		ResourceManager& operator=(const ResourceManager&) = delete;
 
 		virtual ~ResourceManager() = default;
-
-		virtual void Release(RESOURCE resource) = 0;
 
 		bool IsExist(const char* key) const
 		{
@@ -52,6 +53,9 @@ namespace ExtraX
 			}
 			_resources.clear();
 		}
+
+	protected:
+		virtual void Release(RESOURCE resource) = 0;
 
 	};
 }
