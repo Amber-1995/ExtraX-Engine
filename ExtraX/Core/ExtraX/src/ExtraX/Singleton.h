@@ -2,6 +2,8 @@
 #ifndef EXTRAX_DESIGN_PATTERN_H
 #define EXTRAX_DESIGN_PATTERN_H
 
+#include <memory>
+
 namespace ExtraX
 {
 
