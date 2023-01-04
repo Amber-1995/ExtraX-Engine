@@ -3,7 +3,6 @@
 #define EXTRAX_CONTEXT_BASE_H
 
 #include <ExtraX/Common.h>
-#include <ExtraX/Graphics/Window.h>
 #include <ExtraX/Singleton.h>
 
 namespace ExtraX::Graphics::Base
@@ -12,9 +11,12 @@ namespace ExtraX::Graphics::Base
 	{
 	public:
 		virtual ~ContextBase() = default;
+		virtual void SetViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height) = 0;
+		virtual void ClearColor(float r,float g, float b, float a) = 0;
+		virtual void Clear() = 0;
 	};
 
-	template<WINDOW_LIB,GRAPHICS_LIB>
+	template<GRAPHICS_LIB,WINDOW_LIB>
 	class Context;
 }
 
