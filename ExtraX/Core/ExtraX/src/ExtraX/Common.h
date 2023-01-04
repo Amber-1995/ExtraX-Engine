@@ -25,7 +25,12 @@ namespace ExtraX
 
 	enum class GUI_LIB
 	{
-		IMGUI,
+		ImGui,
+	};
+
+	enum class LOG_LIB
+	{
+		SpdLog,
 	};
 }
 
@@ -38,10 +43,6 @@ namespace ExtraX
 #define XX_EXPAND_MACRO(x) x
 #define XX_STRINGIFY_MACRO(x) #x
 
-#ifdef USE_EXTRAX_SETTINGS
-	#include <ExtraXSettings.h>
-#else
-	#include <ExtraX/DefaultSettings.h>
-#endif // EXTRAX_SETTINGS
+
 
 #endif // !EXTRAX_COMMON_H
