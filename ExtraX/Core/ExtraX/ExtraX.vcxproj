@@ -57,7 +57,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <AdditionalIncludeDirectories>$(SolutionDir)\Core\ExtraX\src;$(SolutionDir)\..\Dependencies\spdlog\include;$(SolutionDir)\..\Dependencies\glad\include;$(SolutionDir)\..\Dependencies\glfw\include;$(SolutionDir)\..\Dependencies\glm;$(SolutionDir)\..\Dependencies\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
@@ -72,7 +72,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>EXTRAX_DISABLE_ASSERT;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -87,37 +87,43 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\ExtraX\Graphics\Context\ContextOpenGL.cpp" />
+    <ClCompile Include="src\ExtraX\Graphics\Context\ContextOpenGLGLFW.cpp">
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ClCompile Include="src\ExtraX\Graphics\Context\ContextOpenGLWin32.cpp" />
+    <ClCompile Include="src\ExtraX\Graphics\Shader\ShaderOpenGL.cpp" />
+    <ClCompile Include="src\ExtraX\Graphics\Window\WindowGLFW.cpp" />
+    <ClCompile Include="src\ExtraX\Graphics\Window\WindowWin32.cpp" />
+    <ClCompile Include="src\ExtraX\Initializer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExtraX\Assert.h" />
     <ClInclude Include="src\ExtraX\Common.h" />
-    <ClInclude Include="src\ExtraX\DefaultSettings.h" />
-    <ClInclude Include="src\ExtraX\ExtraX.h" />
-    <ClInclude Include="src\ExtraX\Events\Event.h" />
-    <ClInclude Include="src\ExtraX\Events\EventManager.h" />
-    <ClInclude Include="src\ExtraX\Graphics.h" />
-    <ClInclude Include="src\ExtraX\Graphics\Context.h" />
+    <ClInclude Include="src\ExtraX\Event.h" />
     <ClInclude Include="src\ExtraX\Graphics\Context\ContextBase.h" />
-    <ClInclude Include="src\ExtraX\Graphics\Context\OpenGL.h" />
-    <ClInclude Include="src\ExtraX\Graphics\Shader.h" />
-    <ClInclude Include="src\ExtraX\Graphics\Shader\OpenGLShader.h" />
+    <ClInclude Include="src\ExtraX\Graphics\Context\ContextOpenGLGLFW.h" />
+    <ClInclude Include="src\ExtraX\Graphics\Context\ContextOpenGLWin32.h" />
+    <ClInclude Include="src\ExtraX\Graphics\Context\ContextOpenGL.h" />
+    <ClInclude Include="src\ExtraX\Graphics\Shader\ShaderOpenGL.h" />
     <ClInclude Include="src\ExtraX\Graphics\Shader\ShaderBase.h" />
-    <ClInclude Include="src\ExtraX\Graphics\Window.h" />
-    <ClInclude Include="src\ExtraX\Graphics\Window\GLFWWindow.h" />
-    <ClInclude Include="src\ExtraX\Graphics\Window\Win32Window.h" />
+    <ClInclude Include="src\ExtraX\Graphics\Window\WindowGLFW.h" />
+    <ClInclude Include="src\ExtraX\Graphics\Window\WindowWin32.h" />
     <ClInclude Include="src\ExtraX\Graphics\Window\WindowBase.h" />
-    <ClInclude Include="src\ExtraX\Init.h" />
+    <ClInclude Include="src\ExtraX\Initializer.h" />
     <ClInclude Include="src\ExtraX\Input.h" />
     <ClInclude Include="src\ExtraX\Log.h" />
-    <ClInclude Include="src\ExtraX\Mathematics.h" />
+    <ClInclude Include="src\ExtraX\Log\LogBase.h" />
+    <ClInclude Include="src\ExtraX\Log\LogSpdLog.h" />
     <ClInclude Include="src\ExtraX\Mathematics\Color\ColorBase.h" />
-    <ClInclude Include="src\ExtraX\Mathematics\GLMMathematics.h" />
-    <ClInclude Include="src\ExtraX\Mathematics\Matrix\GLMMatrix.h" />
+    <ClInclude Include="src\ExtraX\Mathematics\MathematicsGLM.h" />
+    <ClInclude Include="src\ExtraX\Mathematics\Matrix\MatrixGLM.h" />
     <ClInclude Include="src\ExtraX\Mathematics\Matrix\MatrixBase.h" />
-    <ClInclude Include="src\ExtraX\Mathematics\Quaternion\GLMQuternion.h" />
+    <ClInclude Include="src\ExtraX\Mathematics\Quaternion\QuternionGLM.h" />
     <ClInclude Include="src\ExtraX\Mathematics\Quaternion\QuaternionBase.h" />
     <ClInclude Include="src\ExtraX\Mathematics\Swizzle.h" />
-    <ClInclude Include="src\ExtraX\Mathematics\Vector\GLMVector.h" />
+    <ClInclude Include="src\ExtraX\Mathematics\Vector\VectorGLM.h" />
     <ClInclude Include="src\ExtraX\Mathematics\Vector\VectorBase.h" />
     <ClInclude Include="src\ExtraX\ResourceManager.h" />
     <ClInclude Include="src\ExtraX\Singleton.h" />

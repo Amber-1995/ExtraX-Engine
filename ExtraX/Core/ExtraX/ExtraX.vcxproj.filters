@@ -18,12 +18,30 @@
     <ClCompile Include="main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="src\ExtraX\Graphics\Window\WindowWin32.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ExtraX\Graphics\Window\WindowGLFW.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ExtraX\Graphics\Context\ContextOpenGL.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ExtraX\Graphics\Context\ContextOpenGLGLFW.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ExtraX\Graphics\Context\ContextOpenGLWin32.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ExtraX\Graphics\Shader\ShaderOpenGL.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ExtraX\Initializer.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\ExtraX\Events\EventManager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ExtraX\Events\Event.h">
+    <ClInclude Include="src\ExtraX\Event.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\ExtraX\Assert.h">
@@ -32,22 +50,10 @@
     <ClInclude Include="src\ExtraX\Common.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="src\ExtraX\DefaultSettings.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ExtraX\ExtraX.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ExtraX\Graphics.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="src\ExtraX\Input.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\ExtraX\Log.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ExtraX\Mathematics.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\ExtraX\ResourceManager.h">
@@ -56,37 +62,28 @@
     <ClInclude Include="src\ExtraX\Singleton.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="src\ExtraX\Graphics\Context.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ExtraX\Graphics\Shader.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ExtraX\Graphics\Window.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="src\ExtraX\Graphics\Context\ContextBase.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="src\ExtraX\Graphics\Context\OpenGL.h">
+    <ClInclude Include="src\ExtraX\Graphics\Context\ContextOpenGL.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="src\ExtraX\Graphics\Shader\OpenGLShader.h">
+    <ClInclude Include="src\ExtraX\Graphics\Shader\ShaderOpenGL.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\ExtraX\Graphics\Shader\ShaderBase.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="src\ExtraX\Graphics\Window\GLFWWindow.h">
+    <ClInclude Include="src\ExtraX\Graphics\Window\WindowGLFW.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="src\ExtraX\Graphics\Window\Win32Window.h">
+    <ClInclude Include="src\ExtraX\Graphics\Window\WindowWin32.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\ExtraX\Graphics\Window\WindowBase.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="src\ExtraX\Mathematics\GLMMathematics.h">
+    <ClInclude Include="src\ExtraX\Mathematics\MathematicsGLM.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\ExtraX\Mathematics\Swizzle.h">
@@ -95,16 +92,16 @@
     <ClInclude Include="src\ExtraX\Mathematics\Vector\VectorBase.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="src\ExtraX\Mathematics\Vector\GLMVector.h">
+    <ClInclude Include="src\ExtraX\Mathematics\Vector\VectorGLM.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="src\ExtraX\Mathematics\Quaternion\GLMQuternion.h">
+    <ClInclude Include="src\ExtraX\Mathematics\Quaternion\QuternionGLM.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\ExtraX\Mathematics\Quaternion\QuaternionBase.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="src\ExtraX\Mathematics\Matrix\GLMMatrix.h">
+    <ClInclude Include="src\ExtraX\Mathematics\Matrix\MatrixGLM.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\ExtraX\Mathematics\Matrix\MatrixBase.h">
@@ -113,7 +110,19 @@
     <ClInclude Include="src\ExtraX\Mathematics\Color\ColorBase.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="src\ExtraX\Init.h">
+    <ClInclude Include="src\ExtraX\Graphics\Context\ContextOpenGLWin32.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ExtraX\Graphics\Context\ContextOpenGLGLFW.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ExtraX\Log\LogBase.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ExtraX\Log\LogSpdLog.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ExtraX\Initializer.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
