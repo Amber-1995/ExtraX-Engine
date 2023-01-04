@@ -6,7 +6,7 @@
 
 namespace ExtraX::Mathematics::Base
 {
-	template<MATHEMATICS_LIB>
+	template<MATHEMATICS_LIB, , typename SCALAR>
 	class Math;
 
 	template< typename SCALAR, typename QUATERNION_TYPE = SCALAR[4] > requires(sizeof(QUATERNION_TYPE) == sizeof(SCALAR) * 4)

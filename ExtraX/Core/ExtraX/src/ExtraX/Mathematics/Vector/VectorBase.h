@@ -8,7 +8,7 @@
 
 namespace ExtraX::Mathematics::Base
 {
-	template<MATHEMATICS_LIB>
+	template<MATHEMATICS_LIB, typename SCALAR>
 	class Math;
 
 	template<typename SCALAR, int Size, typename VECTOR_TYPE = SCALAR[Size]>

@@ -6,7 +6,7 @@
 #include <ExtraX/Mathematics/Swizzle.h>
 namespace ExtraX::Mathematics::Base
 {
-	template<MATHEMATICS_LIB>
+	template<MATHEMATICS_LIB, typename SCALAR>
 	class Math;
 
 	template<typename SCALAR, typename COLOR_TYPE = SCALAR[4]> requires(sizeof(COLOR_TYPE) == sizeof(SCALAR) * 4)

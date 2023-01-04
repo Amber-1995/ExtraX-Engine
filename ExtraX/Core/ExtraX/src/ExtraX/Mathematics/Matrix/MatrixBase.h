@@ -5,7 +5,7 @@
 #include <ExtraX/Common.h>
 namespace ExtraX::Mathematics::Base
 {
-	template<MATHEMATICS_LIB>
+	template<MATHEMATICS_LIB, typename SCALAR>
 	class Math;
 
 	template<typename SCALAR, int M, int N, typename MATRIX_TYPE = SCALAR[M][N]> requires(sizeof(MATRIX_TYPE) == M * N * sizeof(SCALAR))
