@@ -11,7 +11,7 @@ namespace ExtraX::Graphics::Base
 	class ShaderBase
 	{
 	public:
-		virtual void Apply() = 0;
+		virtual void Bind() = 0;
 	};
 
 	template<GRAPHICS_LIB> 
