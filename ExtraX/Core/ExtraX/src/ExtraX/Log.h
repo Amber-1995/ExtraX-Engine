@@ -1,57 +1,47 @@
 #pragma once
-#if !defined(EXTRAX_LOG_H) && !defined(EXTRAX_DISABLE_SPDLOG)
+#ifndef EXTRAX_LOG_H
 #define EXTRAX_LOG_H
 
-#include <spdlog/spdlog.h>
-#include <spdlog/sinks/stdout_color_sinks.h>
+#include <ExtraX/Log/LogSpdLog.h>
 #include <ExtraX/Singleton.h>
 
 namespace ExtraX
 {
-	class Log
+	class CoreLog : public Log<LOG_LIB::SpdLog>
 	{
-	private:
-		std::shared_ptr<spdlog::logger> core_logger;
-		std::shared_ptr<spdlog::logger> client_logger;
-
 	public:
-		Log()
+		CoreLog() :
+			Log<LOG_LIB::SpdLog>("ExtraX")
 		{
-			spdlog::set_pattern("%^[%T]%n: %v%$");
 
-			core_logger = spdlog::stdout_color_mt("ExtraX");
-			core_logger->set_level(spdlog::level::trace);
-
-			client_logger = spdlog::stdout_color_mt("APP");
-			client_logger->set_level(spdlog::level::trace);
 		}
+	};
 
-		std::shared_ptr<spdlog::logger>& GetCore()
+	class ClientLog : public Log<LOG_LIB::SpdLog>
+	{
+	public:
+		ClientLog() :
+			Log<LOG_LIB::SpdLog>("APP")
 		{
-			return core_logger;
-		}
 
-		std::shared_ptr<spdlog::logger>& GetClient()
-		{
-			return client_logger;
 		}
 	};
 }
 
-#ifdef _DEBUG
+#ifndef EXTRAX_DISABLE_LOG
 	// Core log macros
-	#define XX_CORE_TRACE(...)    ::ExtraX::GetSingleton<Log>()->GetCore()->trace(__VA_ARGS__)
-	#define XX_CORE_INFO(...)     ::ExtraX::GetSingleton<Log>()->GetCore()->info(__VA_ARGS__)
-	#define XX_CORE_WARN(...)     ::ExtraX::GetSingleton<Log>()->GetCore()->warn(__VA_ARGS__)
-	#define XX_CORE_ERROR(...)    ::ExtraX::GetSingleton<Log>()->GetCore()->error(__VA_ARGS__)
-	#define XX_CORE_CRITICAL(...) ::ExtraX::GetSingleton<Log>()->GetCore()->critical(__VA_ARGS__)
+	#define XX_CORE_TRACE(...)    ::ExtraX::GetSingleton<::ExtraX::CoreLog>()->Trace(__VA_ARGS__)
+	#define XX_CORE_INFO(...)     ::ExtraX::GetSingleton<::ExtraX::CoreLog>()->Info(__VA_ARGS__)
+	#define XX_CORE_WARN(...)     ::ExtraX::GetSingleton<::ExtraX::CoreLog>()->Warn(__VA_ARGS__)
+	#define XX_CORE_ERROR(...)    ::ExtraX::GetSingleton<::ExtraX::CoreLog>()->Error(__VA_ARGS__)
+	#define XX_CORE_CRITICAL(...) ::ExtraX::GetSingleton<::ExtraX::CoreLog>()->Critical(__VA_ARGS__)
 	
 	// Client log macros
-	#define XX_TRACE(...)         ::ExtraX::GetSingleton<Log>()->GetClient()->trace(__VA_ARGS__)
-	#define XX_INFO(...)          ::ExtraX::GetSingleton<Log>()->GetClient()->info(__VA_ARGS__)
-	#define XX_WARN(...)          ::ExtraX::GetSingleton<Log>()->GetClient()->warn(__VA_ARGS__)
-	#define XX_ERROR(...)         ::ExtraX::GetSingleton<Log>()->GetClient()->error(__VA_ARGS__)
-	#define XX_CRITICAL(...)      ::ExtraX::GetSingleton<Log>()->GetClient()->critical(__VA_ARGS__)
+	#define XX_TRACE(...)         ::ExtraX::GetSingleton<::ExtraX::ClientLog>()->Trace(__VA_ARGS__)
+	#define XX_INFO(...)          ::ExtraX::GetSingleton<::ExtraX::ClientLog>()->Info(__VA_ARGS__)
+	#define XX_WARN(...)          ::ExtraX::GetSingleton<::ExtraX::ClientLog>()->Warn(__VA_ARGS__)
+	#define XX_ERROR(...)         ::ExtraX::GetSingleton<::ExtraX::ClientLog>()->Error(__VA_ARGS__)
+	#define XX_CRITICAL(...)      ::ExtraX::GetSingleton<::ExtraX::ClientLog>()->Critical(__VA_ARGS__)
 #else
 	// Core log macros
 	#define XX_CORE_TRACE(...)   
@@ -68,20 +58,7 @@ namespace ExtraX
 	#define XX_CRITICAL(...)     
 #endif // DEBUG
 
-#else
-	// Core log macros
-	#define XX_CORE_TRACE(...)   
-	#define XX_CORE_INFO(...)    
-	#define XX_CORE_WARN(...)    
-	#define XX_CORE_ERROR(...)   
-	#define XX_CORE_CRITICAL(...)
-	
-	// Client log macros
-	#define XX_TRACE(...)        
-	#define XX_INFO(...)         
-	#define XX_WARN(...)         
-	#define XX_ERROR(...)        
-	#define XX_CRITICAL(...)  
+
 
 #endif // !EXTRAX_LOG_H
 
