@@ -1,12 +1,23 @@
+#include <XXPch.h>
+#include <ExtraX/Event.h>
 #include <ExtraX/Assert.h>
 #include <ExtraX/Input.h>
-#include <ExtraX/Event.h>
+#include <Windows.h>
+#include <windowsx.h>
 #include "WindowWin32.h"
 
 
+namespace ExtraX::Graphics
+{
+	template<>
+	Window* Window::Create<WINDOW_LIB::Win32>(int width, int height, const char* title)
+	{
+		return new Base::Window<WINDOW_LIB::Win32>(width, height, title);
+	}
+}
+
 namespace ExtraX::Graphics::Base
 {
-
 	Window<WINDOW_LIB::Win32>::Window(WNDCLASSEX wcex, Descriptor descriptor)
 	{
 		_instance = wcex.hInstance;
@@ -36,12 +47,12 @@ namespace ExtraX::Graphics::Base
 		UpdateWindow(_hwnd);
 	}
 
-	Window<WINDOW_LIB::Win32>::Window()
+	Window<WINDOW_LIB::Win32>::Window(int width, int height, const char* title)
 	{
 #ifdef UNICODE
-		std::wstring title(DEFAULT_TITLE, DEFAULT_TITLE + strlen(DEFAULT_TITLE));
+		std::wstring title_str(title, title + strlen(title));
 #else
-		std::string title(DEFAULT_TITLE);
+		std::string title_str(title);
 #endif // UNICODE
 		_instance = GetModuleHandle(NULL);
 
@@ -124,6 +135,8 @@ namespace ExtraX::Graphics::Base
 			break;
 			}
 
+			Win32CallBaceEventInfo event_call_back(hWnd, uMsg, wParam, lParam);
+			EventManager::OnEvent(event_call_back);
 			return DefWindowProc(hWnd, uMsg, wParam, lParam);
 		};
 
@@ -147,12 +160,12 @@ namespace ExtraX::Graphics::Base
 		(
 			0,
 			_class_name.c_str(),
-			title.c_str(),
+			title_str.c_str(),
 			WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX,
-			(GetSystemMetrics(SM_CXSCREEN) - WINDOW_WIDTH) / 2,
-			(GetSystemMetrics(SM_CYSCREEN) - WINDOW_HEIGHT) / 2,
-			WINDOW_WIDTH + GetSystemMetrics(SM_CXDLGFRAME) * 2,
-			WINDOW_HEIGHT + GetSystemMetrics(SM_CYDLGFRAME) * 2 + GetSystemMetrics(SM_CYCAPTION),
+			(GetSystemMetrics(SM_CXSCREEN) - width) / 2,
+			(GetSystemMetrics(SM_CYSCREEN) - height) / 2,
+			width + GetSystemMetrics(SM_CXDLGFRAME) * 2,
+			height + GetSystemMetrics(SM_CYDLGFRAME) * 2 + GetSystemMetrics(SM_CYCAPTION),
 			NULL,
 			NULL,
 			GetModuleHandle(NULL),

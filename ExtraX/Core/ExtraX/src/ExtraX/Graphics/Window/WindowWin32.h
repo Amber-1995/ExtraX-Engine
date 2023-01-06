@@ -2,17 +2,26 @@
 #ifndef EXTRAX_WIN32_WINDOW_H
 #define EXTRAX_WIN32_WINDOW_H
 
-#include <Windows.h>
-#include <windowsx.h>
-#include <string>
-
 #include <ExtraX/Graphics/Window/WindowBase.h>
-
+#include <ExtraX/Event.h>
 
 namespace ExtraX::Graphics::Base
 {
+	struct Win32CallBaceEventInfo : public EventInfo<EventType::None>
+	{
+		HWND hWnd;
+		UINT uMsg;
+		WPARAM wParam;
+		LPARAM lParam;
+		Win32CallBaceEventInfo(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) :
+			hWnd(hWnd), uMsg(uMsg), wParam(wParam), lParam(lParam)
+		{
+		}
+		virtual ~Win32CallBaceEventInfo() = default;
+	};
+
 	template<>
-	class Window<WINDOW_LIB::Win32> : public WindowBase
+	class Window<WINDOW_LIB::Win32> : public Graphics::Window
 	{
 	public:
 		struct Descriptor
@@ -51,7 +60,7 @@ namespace ExtraX::Graphics::Base
 	public:
 		Window(WNDCLASSEX wcex, Descriptor descriptor);
 
-		Window();
+		Window(int width, int height, const char* title);
 
 		virtual ~Window();
 

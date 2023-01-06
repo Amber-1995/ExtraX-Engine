@@ -14,14 +14,16 @@ namespace ExtraX::Graphics::Base
 	};
 
 	template<>
-	class Shader<GRAPHICS_LIB::OpenGL> : public ShaderBase
+	class Shader<GRAPHICS_LIB::OpenGL> : public Graphics::Shader
 	{
 	private:
 		unsigned int _shader_program;
 	public:
-		Shader<GRAPHICS_LIB::OpenGL>(const char* vertex_shader_path, const char* fragment_shader_path, const char* tess_control_shader_path = nullptr, const char* tess_evaluation_shader_path = nullptr, const char* geometry_shader_path = nullptr);
+		Shader<GRAPHICS_LIB::OpenGL>(const char* vertex_shader_path, const char* fragment_shader_path, const char* tess_control_shader_path, const char* tess_evaluation_shader_path, const char* geometry_shader_path);
 
-		void Bind() override;
+		void Bind(uint32_t = 0) override;
+
+		void Unbind(uint32_t = 0) override;
 	};
 }
 

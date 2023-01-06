@@ -4,7 +4,7 @@
 #include <ExtraX/Common.h>
 #include <ExtraX/Input.h>
 
-namespace ExtraX::Base
+namespace ExtraX
 {
 	template<GRAPHICS_LIB, WINDOW_LIB>
 	class Initializer

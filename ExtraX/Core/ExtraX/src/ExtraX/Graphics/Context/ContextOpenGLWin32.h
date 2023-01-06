@@ -15,7 +15,7 @@ namespace ExtraX::Graphics::Base
 		HDC _dc;
 		HGLRC _rc;
 	public:
-		Context(Window<WINDOW_LIB::Win32>* window = GetSingleton<Window<WINDOW_LIB::Win32>>());
+		Context(Window<WINDOW_LIB::Win32>* window);
 
 		virtual ~Context();
 

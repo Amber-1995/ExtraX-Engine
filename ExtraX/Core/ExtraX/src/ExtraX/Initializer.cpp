@@ -1,7 +1,9 @@
-#include "Initializer.h"
+#include <XXPch.h>
 #include <GLFW/glfw3.h>
+#include "Initializer.h"
 
-namespace ExtraX::Base
+
+namespace ExtraX
 {
 	void Initializer<GRAPHICS_LIB::OpenGL, WINDOW_LIB::GLFW>::Init()
 	{

@@ -4,17 +4,12 @@
 
 #include <ExtraX/Common.h>
 
-namespace ExtraX::Graphics::Base
+
+namespace ExtraX::Graphics
 {
-	inline constexpr int WINDOW_WIDTH = 800;
 
-	inline constexpr int WINDOW_HEIGHT = 600;
 
-	inline constexpr int TITLE_MAX = 128;
-
-	inline const char* DEFAULT_TITLE = "ExtraX";
-
-	class WindowBase
+	class Window
 	{
 	public:
 		virtual bool ShouldClose() = 0;
@@ -27,8 +22,16 @@ namespace ExtraX::Graphics::Base
 		virtual void SetTitle(const char* title) = 0;
 		virtual void SetSize(int width, int height) = 0;
 		virtual void SetPosition(int x, int y) = 0;
+		virtual ~Window() = default;
+
+		template<WINDOW_LIB>
+		static Window* Create(int width, int height, const char* title);
 	};
 
+}
+
+namespace ExtraX::Graphics::Base
+{
 	template<WINDOW_LIB>
 	class Window;
 }

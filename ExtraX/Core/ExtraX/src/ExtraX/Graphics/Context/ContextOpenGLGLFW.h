@@ -13,7 +13,7 @@ namespace ExtraX::Graphics::Base
 	private:
 		Window<WINDOW_LIB::GLFW>* _window;
 	public:
-		Context(Window<WINDOW_LIB::GLFW>* window = GetSingleton <Window<WINDOW_LIB::GLFW>>());
+		Context(Window<WINDOW_LIB::GLFW>* window);
 
 		virtual ~Context();
 

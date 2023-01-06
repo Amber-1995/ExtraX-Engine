@@ -1,7 +1,20 @@
+#include <XXPch.h>
 #include <Windows.h>
 #include <glad/glad.h>
 #include <ExtraX/Assert.h>
 #include "ContextOpenGLWin32.h"
+
+namespace ExtraX::Graphics
+{
+	template<>
+	Context* Context::Create<GRAPHICS_LIB::OpenGL, WINDOW_LIB::Win32>(Window* window)
+	{
+		Base::Window<WINDOW_LIB::Win32>* w = dynamic_cast<Base::Window<WINDOW_LIB::Win32>*>(window);
+		XX_CORE_ASSERT(w, "Window is not Win32");
+
+		return new Base::Context<GRAPHICS_LIB::OpenGL, WINDOW_LIB::Win32>(w);
+	}
+}
 
 namespace ExtraX::Graphics::Base
 {

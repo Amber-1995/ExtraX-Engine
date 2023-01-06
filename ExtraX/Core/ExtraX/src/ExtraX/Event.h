@@ -2,8 +2,8 @@
 #ifndef EXTRAX_EVENT_H
 #define EXTRAX_EVENT_H
 
-#include <functional>
 #include <memory>
+#include <functional>
 
 namespace ExtraX
 {
@@ -18,15 +18,20 @@ namespace ExtraX
 
 
 	template<EventType>
-	class EventInfo
+	struct EventInfo
 	{
 
 	};
 
 	template<>
-	class EventInfo<EventType::KeyDown>
+	struct EventInfo<EventType::None>
 	{
-	public:
+		virtual ~EventInfo() = default;
+	};
+
+	template<>
+	struct EventInfo<EventType::KeyDown>
+	{
 		int keycode;
 
 		EventInfo(int keycode) :
@@ -36,9 +41,8 @@ namespace ExtraX
 	};
 
 	template<>
-	class EventInfo<EventType::KeyUp>
+	struct EventInfo<EventType::KeyUp>
 	{
-	public:
 		int keycode;
 
 		EventInfo(int keycode) :
@@ -48,9 +52,8 @@ namespace ExtraX
 	};
 
 	template<>
-	class EventInfo<EventType::MouseMoved>
+	struct EventInfo<EventType::MouseMoved>
 	{
-	public:
 		int x,y;
 
 		EventInfo(int x, int y) :
@@ -61,9 +64,8 @@ namespace ExtraX
 	};
 
 	template<>
-	class EventInfo<EventType::MouseScrolled>
+	struct EventInfo<EventType::MouseScrolled>
 	{
-	public:
 		int scroll_wheel;
 
 		EventInfo(int scroll_wheel) :
@@ -72,38 +74,38 @@ namespace ExtraX
 		}
 	};
 
-	template<EventType E>
-	using EventCallBack = std::shared_ptr<std::function<void(EventInfo<E>&)>>;
+	template<EventType event_type>
+	using EventCallBack = std::shared_ptr<std::function<void(EventInfo<event_type>&)>>;
 
-	template<EventType E, typename ...ARGS>
-	inline EventCallBack<E> CreateEventCallBack(ARGS ...args)
+	template<EventType event_type, typename ...ARGS>
+	inline EventCallBack<event_type> CreateEventCallBack(ARGS ...args)
 	{
-		return std::make_shared<std::function<void(EventInfo<E>&)>>(std::bind(args..., std::placeholders::_1));
+		return std::make_shared<std::function<void(EventInfo<event_type>&)>>(std::bind(args..., std::placeholders::_1));
 	}
 
 	class EventManager
 	{
 	private:
-		template<EventType E>
-		using CallBackObserve = std::weak_ptr<std::function<void(EventInfo<E>&)>>;
+		template<EventType event_type>
+		using CallBackObserve = std::weak_ptr<std::function<void(EventInfo<event_type>&)>>;
 
-		template<EventType E>
-		inline static std::vector<CallBackObserve<E>> _observe;
+		template<EventType event_type>
+		inline static std::vector<CallBackObserve<event_type>> _observe;
 
 	public:
-		template<EventType E>
-		inline static void SetCallBack(EventCallBack<E> event_func)
+		template<EventType event_type>
+		inline static void SetCallBack(EventCallBack<event_type> callback)
 		{
-			_observe<E>.emplace_back(event_func);
+			_observe<event_type>.emplace_back(callback);
 		}
 
-		template<EventType E>
-		inline static void OnEvent(EventInfo<E>& event)
+		template<EventType event_type>
+		inline static void OnEvent(EventInfo<event_type>& event)
 		{
 			//remove expired event
-			_observe<E>.erase(std::remove_if(_observe<E>.begin(), _observe<E>.end(), [](std::weak_ptr<std::function<void(EventInfo<E>&)>>& p) { return p.expired(); }), _observe<E>.end());
+			_observe<event_type>.erase(std::remove_if(_observe<event_type>.begin(), _observe<event_type>.end(), [](std::weak_ptr<std::function<void(EventInfo<event_type>&)>>& p) { return p.expired(); }), _observe<event_type>.end());
 
-			for (auto& i : _observe<E>)
+			for (auto& i : _observe<event_type>)
 			{
 				(*i.lock())(event);
 			}

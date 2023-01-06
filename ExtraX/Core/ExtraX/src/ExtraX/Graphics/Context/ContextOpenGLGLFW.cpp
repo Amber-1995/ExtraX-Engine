@@ -1,6 +1,21 @@
+#include <XXPch.h>
 #include <glad/glad.h>
 #include <ExtraX/Assert.h>
+#include <ExtraX/Graphics/Window/WindowGLFW.h>
 #include "ContextOpenGLGLFW.h"
+
+
+namespace ExtraX::Graphics
+{
+	template<>
+	Context* Context::Create<GRAPHICS_LIB::OpenGL, WINDOW_LIB::GLFW>(Window* window)
+	{
+		Base::Window<WINDOW_LIB::GLFW>*w = dynamic_cast<Base::Window<WINDOW_LIB::GLFW>*>(window);
+		XX_CORE_ASSERT(w, "Window is not GLFW");
+
+		return new Base::Context<GRAPHICS_LIB::OpenGL, WINDOW_LIB::GLFW>(w);
+	}
+}
 
 namespace ExtraX::Graphics::Base
 {

@@ -1,7 +1,17 @@
+#include <XXPch.h>
 #include <ExtraX/Assert.h>
 #include <ExtraX/Input.h>
 #include <ExtraX/Event.h>
 #include "WindowGLFW.h"
+
+namespace ExtraX::Graphics
+{
+	template<>
+	Window* Window::Create<WINDOW_LIB::GLFW>(int width, int height, const char* title)
+	{
+		return new Base::Window<WINDOW_LIB::GLFW>(width, height, title);
+	}
+}
 
 namespace ExtraX::Graphics::Base
 {
@@ -15,7 +25,7 @@ namespace ExtraX::Graphics::Base
 		XX_CORE_ASSERT(_window, "Failed to create GLFW window");
 
 		const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
-		glfwSetWindowPos(_window, (mode->width - WINDOW_WIDTH) / 2, (mode->height - WINDOW_HEIGHT) / 2);
+		glfwSetWindowPos(_window, (mode->width - width) / 2, (mode->height - height) / 2);
 
 		auto key_callback = [](GLFWwindow* window, int key, int scancode, int action, int mods)
 		{

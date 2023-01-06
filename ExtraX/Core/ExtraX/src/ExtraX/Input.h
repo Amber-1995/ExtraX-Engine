@@ -211,107 +211,55 @@ namespace ExtraX
 	class Input
 	{
 	private:
-		inline static std::bitset<0xff> _key_states_current;
+		static std::bitset<0xff> _key_states_current;
 
-		inline static std::bitset<0xff> _key_states_latest;
+		static std::bitset<0xff> _key_states_latest;
 
-		inline static int _scroll_wheel;
+		static int _scroll_wheel;
 
-		inline static int _mouse_position_x;
+		static int _mouse_position_x;
 
-		inline static int _mouse_position_y;
+		static int _mouse_position_y;
 
-		inline static EventCallBack<EventType::KeyDown> _event_key_down;
+		static EventCallBack<EventType::KeyDown> _event_key_down;
 
-		inline static EventCallBack<EventType::KeyUp> _event_key_up;
+		static EventCallBack<EventType::KeyUp> _event_key_up;
 
-		inline static EventCallBack<EventType::MouseMoved> _event_mouse_moved;
+		static EventCallBack<EventType::MouseMoved> _event_mouse_moved;
 
-		inline static EventCallBack<EventType::MouseScrolled> _event_mouse_scrolled;
+		static EventCallBack<EventType::MouseScrolled> _event_mouse_scrolled;
 
-		inline static EventCallBack<EventType::FrameEnd> _event_frame_end;
+		static EventCallBack<EventType::FrameEnd> _event_frame_end;
 
 	public:
 		Input() = delete;
 
-		inline static void Init()
-		{
-			_event_key_down = CreateEventCallBack<EventType::KeyDown>(Input::OnKeyDown);
-			EventManager::SetCallBack(_event_key_down);
-			_event_key_up = CreateEventCallBack<EventType::KeyUp>(Input::OnKeyUp);
-			EventManager::SetCallBack(_event_key_up);
-			_event_mouse_moved = CreateEventCallBack<EventType::MouseMoved>(Input::OnMouseMoved);
-			EventManager::SetCallBack(_event_mouse_moved);
-			_event_mouse_scrolled = CreateEventCallBack<EventType::MouseScrolled>(Input::OnMouseScrolled);
-			EventManager::SetCallBack(_event_mouse_scrolled);
-			_event_frame_end = CreateEventCallBack<EventType::FrameEnd>(Input::OnFrameEnd);
-			EventManager::SetCallBack(_event_frame_end);
-		}
+		static void Init();
 
-		inline static bool GetKey(size_t keycode)
-		{
-			return _key_states_current[keycode];
-		}
+		static bool GetKey(size_t keycode);
 
-		inline static bool GetKeyDown(size_t keycode)
-		{
-			return ((!_key_states_latest[keycode]) && _key_states_current[keycode]);
-		}
+		static bool GetKeyDown(size_t keycode);
 
-		inline static bool GetKeyUp(size_t keycode)
-		{
-			return (_key_states_latest[keycode] && (!_key_states_current[keycode]));
-		}
+		static bool GetKeyUp(size_t keycode);
 
-		inline static int GetScroolWheel()
-		{
-			return _scroll_wheel;
-		}
+		static int GetScroolWheel();
 
-		inline static int GetMousePositionX()
-		{
-			return _mouse_position_x;
-		}
+		static int GetMousePositionX();
 
-		inline static int GetMousePositionY()
-		{
-			return _mouse_position_y;
-		}
+		static int GetMousePositionY();
 
-		inline static void Reset()
-		{
-			_key_states_current.reset();
-			_key_states_latest.reset();
-		}
+		static void Reset();
 
 	private:
-		inline static void OnKeyDown(EventInfo<EventType::KeyDown>& event)
-		{
-			_key_states_current[event.keycode] = true;
-		}
+		static void OnKeyDown(EventInfo<EventType::KeyDown>& event);
 
-		inline static void OnKeyUp(EventInfo<EventType::KeyUp>& event)
-		{
-			_key_states_current[event.keycode] = false;
-		}
+		static void OnKeyUp(EventInfo<EventType::KeyUp>& event);
 
-		inline static void OnMouseScrolled(EventInfo<EventType::MouseScrolled>& event)
-		{
-			_scroll_wheel += event.scroll_wheel;
-		}
+		static void OnMouseScrolled(EventInfo<EventType::MouseScrolled>& event);
 
-		inline static void OnMouseMoved(EventInfo<EventType::MouseMoved>& event)
-		{
-			_mouse_position_x = event.x;
-			_mouse_position_y = event.y;
-		}
+		static void OnMouseMoved(EventInfo<EventType::MouseMoved>& event);
 
-		inline static void OnFrameEnd(EventInfo<EventType::FrameEnd>& event)
-		{
-			_key_states_latest = _key_states_current;
-			_scroll_wheel = 0;
-		}
-
+		static void OnFrameEnd(EventInfo<EventType::FrameEnd>& event);
 
 	};
 }

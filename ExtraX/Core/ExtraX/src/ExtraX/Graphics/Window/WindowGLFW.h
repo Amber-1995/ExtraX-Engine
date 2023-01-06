@@ -9,12 +9,12 @@
 namespace ExtraX::Graphics::Base
 {
 	template<>
-	class Window<WINDOW_LIB::GLFW> : public WindowBase
+	class Window<WINDOW_LIB::GLFW> : public Graphics::Window
 	{
 	private:
 		GLFWwindow* _window;
 	public:
-		Window<WINDOW_LIB::GLFW>(int width = WINDOW_WIDTH, int height = WINDOW_HEIGHT, const char* title = DEFAULT_TITLE, GLFWmonitor* monitor = NULL, GLFWwindow* share = NULL);
+		Window<WINDOW_LIB::GLFW>(int width, int height, const char* title, GLFWmonitor* monitor = NULL, GLFWwindow* share = NULL);
 
 		virtual ~Window<WINDOW_LIB::GLFW>();
 

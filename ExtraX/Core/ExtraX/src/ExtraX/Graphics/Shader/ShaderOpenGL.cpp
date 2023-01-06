@@ -1,10 +1,60 @@
+#include <XXPch.h>
 #include <glad/glad.h>
-#include <filesystem>
-#include <fstream>
 #include <ExtraX/Assert.h>
-#include <string>
-#include <sstream>
 #include "ShaderOpenGL.h"
+
+
+namespace ExtraX::Graphics
+{
+	template<>
+	Shader* Shader::Create<GRAPHICS_LIB::OpenGL, const char*, const char*>
+	(
+		Context* context,
+		const char* vertex_shader_path,
+		const char* fragment_shader_path
+	)
+	{
+		return new Base::Shader<GRAPHICS_LIB::OpenGL>(vertex_shader_path, fragment_shader_path,nullptr,nullptr,nullptr);
+	}
+	template<>
+	Shader* Shader::Create<GRAPHICS_LIB::OpenGL, const char*, const char*, const char*>
+	(
+		Context* context,
+		const char* vertex_shader_path,
+		const char* fragment_shader_path,
+		const char* tess_control_shader_path
+	)
+	{
+		return new Base::Shader<GRAPHICS_LIB::OpenGL>(vertex_shader_path, fragment_shader_path, tess_control_shader_path, nullptr, nullptr);
+	}
+
+	template<>
+	Shader* Shader::Create<GRAPHICS_LIB::OpenGL, const char*, const char*, const char*, const char*>
+	(
+		Context* context,
+		const char* vertex_shader_path,
+		const char* fragment_shader_path,
+		const char* tess_control_shader_path,
+		const char* tess_evaluation_shader_path
+	)
+	{
+		return new Base::Shader<GRAPHICS_LIB::OpenGL>(vertex_shader_path, fragment_shader_path, tess_control_shader_path, tess_evaluation_shader_path, nullptr);
+	}
+
+	template<>
+	Shader* Shader::Create<GRAPHICS_LIB::OpenGL, const char*, const char*, const char*, const char*, const char*>
+	(
+		Context* context, 
+		const char* vertex_shader_path, 
+		const char* fragment_shader_path, 
+		const char* tess_control_shader_path, 
+		const char* tess_evaluation_shader_path, 
+		const char* geometry_shader_path
+	)
+	{
+		return new Base::Shader<GRAPHICS_LIB::OpenGL>(vertex_shader_path, fragment_shader_path, tess_control_shader_path, tess_evaluation_shader_path, geometry_shader_path);
+	}
+}
 
 namespace ExtraX::Graphics::Base
 {
@@ -12,7 +62,6 @@ namespace ExtraX::Graphics::Base
 	{
 		glDeleteShader(resource);
 	}
-
 
 	Shader<GRAPHICS_LIB::OpenGL>::Shader
 	(
@@ -77,8 +126,13 @@ namespace ExtraX::Graphics::Base
 		glLinkProgram(_shader_program);
 	}
 
-	void Shader<GRAPHICS_LIB::OpenGL>::Bind()
+	void Shader<GRAPHICS_LIB::OpenGL>::Bind(uint32_t)
 	{
 		glUseProgram(_shader_program);
+	}
+
+	void Shader<GRAPHICS_LIB::OpenGL>::Unbind(uint32_t)
+	{
+		glUseProgram(0);
 	}
 }

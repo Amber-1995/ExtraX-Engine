@@ -57,9 +57,11 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Core\ExtraX\src;$(SolutionDir)\..\Dependencies\spdlog\include;$(SolutionDir)\..\Dependencies\glad\include;$(SolutionDir)\..\Dependencies\glfw\include;$(SolutionDir)\..\Dependencies\glm;$(SolutionDir)\..\Dependencies\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Core\ExtraX\src;$(SolutionDir)\Core\ExtraX\src\Pch;$(SolutionDir)\..\Dependencies\spdlog\include;$(SolutionDir)\..\Dependencies\glad\include;$(SolutionDir)\..\Dependencies\glfw\include;$(SolutionDir)\..\Dependencies\glm;$(SolutionDir)\..\Dependencies\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>XXPch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -76,7 +78,9 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Core\ExtraX\src;$(SolutionDir)\..\Dependencies\spdlog\include;$(SolutionDir)\..\Dependencies\glad\include;$(SolutionDir)\..\Dependencies\glfw\include;$(SolutionDir)\..\Dependencies\glm;$(SolutionDir)\..\Dependencies\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Core\ExtraX\src;$(SolutionDir)\Core\ExtraX\src\Pch;$(SolutionDir)\..\Dependencies\spdlog\include;$(SolutionDir)\..\Dependencies\glad\include;$(SolutionDir)\..\Dependencies\glfw\include;$(SolutionDir)\..\Dependencies\glm;$(SolutionDir)\..\Dependencies\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>XXPch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -86,22 +90,35 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\ExtraX\Event.cpp" />
+    <ClCompile Include="src\ExtraX\ExtraX.cpp" />
+    <ClCompile Include="src\ExtraX\Graphics\Context\ContextBase.cpp" />
     <ClCompile Include="src\ExtraX\Graphics\Context\ContextOpenGL.cpp" />
     <ClCompile Include="src\ExtraX\Graphics\Context\ContextOpenGLGLFW.cpp">
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <ClCompile Include="src\ExtraX\Graphics\Context\ContextOpenGLWin32.cpp" />
+    <ClCompile Include="src\ExtraX\Graphics\Shader\ShaderBase.cpp" />
     <ClCompile Include="src\ExtraX\Graphics\Shader\ShaderOpenGL.cpp" />
+    <ClCompile Include="src\ExtraX\Graphics\Window\WindowBase.cpp" />
     <ClCompile Include="src\ExtraX\Graphics\Window\WindowGLFW.cpp" />
     <ClCompile Include="src\ExtraX\Graphics\Window\WindowWin32.cpp" />
     <ClCompile Include="src\ExtraX\Initializer.cpp" />
+    <ClCompile Include="src\ExtraX\Input.cpp" />
+    <ClCompile Include="src\ExtraX\Log.cpp" />
+    <ClCompile Include="src\ExtraX\ResourceManager.cpp" />
+    <ClCompile Include="src\ExtraX\Singleton.cpp" />
+    <ClCompile Include="src\Pch\XXPch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExtraX\Assert.h" />
     <ClInclude Include="src\ExtraX\Common.h" />
     <ClInclude Include="src\ExtraX\Event.h" />
+    <ClInclude Include="src\ExtraX\ExtraX.h" />
     <ClInclude Include="src\ExtraX\Graphics\Context\ContextBase.h" />
     <ClInclude Include="src\ExtraX\Graphics\Context\ContextOpenGLGLFW.h" />
     <ClInclude Include="src\ExtraX\Graphics\Context\ContextOpenGLWin32.h" />
@@ -114,8 +131,6 @@
     <ClInclude Include="src\ExtraX\Initializer.h" />
     <ClInclude Include="src\ExtraX\Input.h" />
     <ClInclude Include="src\ExtraX\Log.h" />
-    <ClInclude Include="src\ExtraX\Log\LogBase.h" />
-    <ClInclude Include="src\ExtraX\Log\LogSpdLog.h" />
     <ClInclude Include="src\ExtraX\Mathematics\Color\ColorBase.h" />
     <ClInclude Include="src\ExtraX\Mathematics\MathematicsGLM.h" />
     <ClInclude Include="src\ExtraX\Mathematics\Matrix\MatrixGLM.h" />
@@ -127,6 +142,7 @@
     <ClInclude Include="src\ExtraX\Mathematics\Vector\VectorBase.h" />
     <ClInclude Include="src\ExtraX\ResourceManager.h" />
     <ClInclude Include="src\ExtraX\Singleton.h" />
+    <ClInclude Include="src\Pch\XXPch.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Dependencies\glad\glad.vcxproj">

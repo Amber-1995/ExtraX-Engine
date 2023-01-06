@@ -2,9 +2,6 @@
 #ifndef EXTRAX_RESOURCE_MANAGER_H
 #define EXTRAX_RESOURCE_MANAGER_H
 
-#include <unordered_map>
-#include <string.h>
-
 namespace ExtraX
 {
 	template<typename RESOURCE>

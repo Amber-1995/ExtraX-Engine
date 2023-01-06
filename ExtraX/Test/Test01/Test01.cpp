@@ -1,4 +1,5 @@
-#include "ExtraX.h"
+#include "ExtraX/ExtraX.h"
+#include "ExtraX/Log.h"
 
 
 using namespace ExtraX;
@@ -8,10 +9,10 @@ using namespace ExtraX::Graphics;
 
 int main()
 {
-	Initializer::Init();
+	Init<GRAPHICS_LIB::OpenGL, WINDOW_LIB::Win32>();
 
-	Window* window = GetSingleton<Window>();
-	Context* context = GetSingleton<Context>();
+	Window* window = XXCreateWindow(800,600,"ExtraX");
+	Context* context =XXCreateContext(window);
 	
 	while (!window->ShouldClose())
 	{
@@ -21,7 +22,7 @@ int main()
 
 		if (Input::GetKeyDown(KeyCode::A))
 		{
-			XX_INFO("23333");
+			XX_INFO("2333");
 		}
 
 
