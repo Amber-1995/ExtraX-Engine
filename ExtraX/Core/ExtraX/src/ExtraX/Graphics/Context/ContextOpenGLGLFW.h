@@ -8,18 +8,20 @@
 namespace ExtraX::Graphics::Base
 {
 	template<>
-	class Context< GRAPHICS_LIB::OpenGL, WINDOW_LIB::GLFW> : public ContextOpenGL
+	class Context<"OpenGL", "GLFW"> : public ContextOpenGL
 	{
 	private:
-		Window<WINDOW_LIB::GLFW>* _window;
+		Window<"GLFW">* _window;
 	public:
-		Context(Window<WINDOW_LIB::GLFW>* window);
+		Context(Window<"GLFW">* window);
 
 		virtual ~Context();
 
 		void SwapBuffers() override;
 
 		void MakeCurrent();
+
+		static Graphics::Context* Create(Graphics::Window* window);
 	};
 }
 

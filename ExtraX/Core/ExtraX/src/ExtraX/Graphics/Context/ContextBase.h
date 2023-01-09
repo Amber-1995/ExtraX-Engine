@@ -2,7 +2,7 @@
 #ifndef EXTRAX_CONTEXT_BASE_H
 #define EXTRAX_CONTEXT_BASE_H
 
-#include <ExtraX/Common.h>
+#include <ExtraX/StringLiteral.h>
 #include <ExtraX/Graphics/Window/WindowBase.h>
 
 
@@ -16,9 +16,6 @@ namespace ExtraX::Graphics
 		virtual void Clear() = 0;
 		virtual void SwapBuffers() = 0;
 		virtual ~Context() = default;
-
-		template<GRAPHICS_LIB, WINDOW_LIB>
-		static Context* Create(Window* window);
 	};
 
 
@@ -26,7 +23,7 @@ namespace ExtraX::Graphics
 
 namespace ExtraX::Graphics::Base
 {
-	template<GRAPHICS_LIB,WINDOW_LIB>
+	template<StringLiteral, StringLiteral>
 	class Context;
 }
 

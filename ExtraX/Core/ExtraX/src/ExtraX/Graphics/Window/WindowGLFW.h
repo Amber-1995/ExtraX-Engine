@@ -2,21 +2,19 @@
 #ifndef EXTRAX_GLFW_WINDOW_H
 #define EXTRAX_GLFW_WINDOW_H
 
-#include <GLFW/glfw3.h>
-
 #include <ExtraX/Graphics/Window/WindowBase.h>
 
 namespace ExtraX::Graphics::Base
 {
 	template<>
-	class Window<WINDOW_LIB::GLFW> : public Graphics::Window
+	class Window<"GLFW"> : public Graphics::Window
 	{
 	private:
 		GLFWwindow* _window;
 	public:
-		Window<WINDOW_LIB::GLFW>(int width, int height, const char* title, GLFWmonitor* monitor = NULL, GLFWwindow* share = NULL);
+		Window(int width, int height, const char* title, GLFWmonitor* monitor = NULL, GLFWwindow* share = NULL);
 
-		virtual ~Window<WINDOW_LIB::GLFW>();
+		virtual ~Window();
 
 		GLFWwindow* GetHandle();
 
@@ -39,6 +37,8 @@ namespace ExtraX::Graphics::Base
 		void SetSize(int width, int height) override;
 
 		void SetPosition(int x, int y) override;
+
+		static Graphics::Window* Create(int width, int height, const char* title);
 
 	};
 }

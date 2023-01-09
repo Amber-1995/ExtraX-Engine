@@ -8,14 +8,14 @@
 namespace ExtraX::Graphics::Base
 {
 	template<>
-	class Context<GRAPHICS_LIB::OpenGL, WINDOW_LIB::Win32> : public ContextOpenGL
+	class Context<"OpenGL", "Win32"> : public ContextOpenGL
 	{
 	private:
-		Window<WINDOW_LIB::Win32>* _window;
+		Window<"Win32">* _window;
 		HDC _dc;
 		HGLRC _rc;
 	public:
-		Context(Window<WINDOW_LIB::Win32>* window);
+		Context(Window<"Win32">* window);
 
 		virtual ~Context();
 
@@ -23,6 +23,7 @@ namespace ExtraX::Graphics::Base
 
 		void MakeCurrent();
 
+		static Graphics::Context* Create(Graphics::Window* window);
 	};
 }
 

@@ -2,8 +2,7 @@
 #ifndef EXTRAX_WINDOW_BASE_H
 #define EXTRAX_WINDOW_BASE_H
 
-#include <ExtraX/Common.h>
-
+#include <ExtraX/StringLiteral.h>
 
 namespace ExtraX::Graphics
 {
@@ -23,16 +22,13 @@ namespace ExtraX::Graphics
 		virtual void SetSize(int width, int height) = 0;
 		virtual void SetPosition(int x, int y) = 0;
 		virtual ~Window() = default;
-
-		template<WINDOW_LIB>
-		static Window* Create(int width, int height, const char* title);
 	};
 
 }
 
 namespace ExtraX::Graphics::Base
 {
-	template<WINDOW_LIB>
+	template<StringLiteral>
 	class Window;
 }
 

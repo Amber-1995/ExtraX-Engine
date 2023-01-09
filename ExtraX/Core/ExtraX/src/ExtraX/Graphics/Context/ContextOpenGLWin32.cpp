@@ -4,21 +4,9 @@
 #include <ExtraX/Assert.h>
 #include "ContextOpenGLWin32.h"
 
-namespace ExtraX::Graphics
-{
-	template<>
-	Context* Context::Create<GRAPHICS_LIB::OpenGL, WINDOW_LIB::Win32>(Window* window)
-	{
-		Base::Window<WINDOW_LIB::Win32>* w = dynamic_cast<Base::Window<WINDOW_LIB::Win32>*>(window);
-		XX_CORE_ASSERT(w, "Window is not Win32");
-
-		return new Base::Context<GRAPHICS_LIB::OpenGL, WINDOW_LIB::Win32>(w);
-	}
-}
-
 namespace ExtraX::Graphics::Base
 {
-	Context<GRAPHICS_LIB::OpenGL, WINDOW_LIB::Win32>::Context(Window<WINDOW_LIB::Win32>* window)
+	Context<"OpenGL", "Win32">::Context(Window<"Win32">* window)
 	{
 		_window = window;
 		_dc = GetDC(window->GetHandle());
@@ -48,18 +36,27 @@ namespace ExtraX::Graphics::Base
 		glViewport(0, 0, _window->GetWidth(), _window->GetHeight());
 	}
 
-	Context<GRAPHICS_LIB::OpenGL, WINDOW_LIB::Win32>::~Context()
+	Context<"OpenGL", "Win32">::~Context()
 	{
 
 	}
 
-	void Context<GRAPHICS_LIB::OpenGL, WINDOW_LIB::Win32>::SwapBuffers()
+	void Context<"OpenGL", "Win32">::SwapBuffers()
 	{
 		::SwapBuffers(_dc);
 	}
 
-	void Context<GRAPHICS_LIB::OpenGL, WINDOW_LIB::Win32>::MakeCurrent()
+	void Context<"OpenGL", "Win32">::MakeCurrent()
 	{
 		wglMakeCurrent(_dc, _rc);
+	}
+
+	Graphics::Context* Context<"OpenGL", "Win32">::Create(Graphics::Window* window)
+	{
+		Window<"Win32">* window_win32 = dynamic_cast<Window<"Win32">*>(window);
+		
+		XX_CORE_ASSERT(window_win32,"Window is not Win32");
+
+		return new Context<"OpenGL", "Win32">(window_win32);
 	}
 }

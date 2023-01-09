@@ -3,67 +3,14 @@
 #include <ExtraX/Assert.h>
 #include "ShaderOpenGL.h"
 
-
-namespace ExtraX::Graphics
-{
-	template<>
-	Shader* Shader::Create<GRAPHICS_LIB::OpenGL, const char*, const char*>
-	(
-		Context* context,
-		const char* vertex_shader_path,
-		const char* fragment_shader_path
-	)
-	{
-		return new Base::Shader<GRAPHICS_LIB::OpenGL>(vertex_shader_path, fragment_shader_path,nullptr,nullptr,nullptr);
-	}
-	template<>
-	Shader* Shader::Create<GRAPHICS_LIB::OpenGL, const char*, const char*, const char*>
-	(
-		Context* context,
-		const char* vertex_shader_path,
-		const char* fragment_shader_path,
-		const char* tess_control_shader_path
-	)
-	{
-		return new Base::Shader<GRAPHICS_LIB::OpenGL>(vertex_shader_path, fragment_shader_path, tess_control_shader_path, nullptr, nullptr);
-	}
-
-	template<>
-	Shader* Shader::Create<GRAPHICS_LIB::OpenGL, const char*, const char*, const char*, const char*>
-	(
-		Context* context,
-		const char* vertex_shader_path,
-		const char* fragment_shader_path,
-		const char* tess_control_shader_path,
-		const char* tess_evaluation_shader_path
-	)
-	{
-		return new Base::Shader<GRAPHICS_LIB::OpenGL>(vertex_shader_path, fragment_shader_path, tess_control_shader_path, tess_evaluation_shader_path, nullptr);
-	}
-
-	template<>
-	Shader* Shader::Create<GRAPHICS_LIB::OpenGL, const char*, const char*, const char*, const char*, const char*>
-	(
-		Context* context, 
-		const char* vertex_shader_path, 
-		const char* fragment_shader_path, 
-		const char* tess_control_shader_path, 
-		const char* tess_evaluation_shader_path, 
-		const char* geometry_shader_path
-	)
-	{
-		return new Base::Shader<GRAPHICS_LIB::OpenGL>(vertex_shader_path, fragment_shader_path, tess_control_shader_path, tess_evaluation_shader_path, geometry_shader_path);
-	}
-}
-
 namespace ExtraX::Graphics::Base
 {
-	void ShaderResourceManager<GRAPHICS_LIB::OpenGL>::Release(unsigned int resource)
+	void ShaderResourceManager<"OpenGL">::Release(unsigned int resource)
 	{
 		glDeleteShader(resource);
 	}
 
-	Shader<GRAPHICS_LIB::OpenGL>::Shader
+	Shader<"OpenGL">::Shader
 	(
 		const char* vertex_shader_path,
 		const char* fragment_shader_path,
@@ -78,7 +25,7 @@ namespace ExtraX::Graphics::Base
 		{
 			if (shader_path)
 			{
-				auto shader_resource_manager = GetSingleton<ShaderResourceManager<GRAPHICS_LIB::OpenGL>>();
+				auto shader_resource_manager = GetSingleton<ShaderResourceManager<"OpenGL">>();
 				unsigned int shader;
 
 				std::string absolute_path = std::filesystem::absolute(std::filesystem::path(shader_path)).string().c_str();
@@ -126,13 +73,19 @@ namespace ExtraX::Graphics::Base
 		glLinkProgram(_shader_program);
 	}
 
-	void Shader<GRAPHICS_LIB::OpenGL>::Bind(uint32_t)
+	void Shader<"OpenGL">::Bind(uint32_t)
 	{
 		glUseProgram(_shader_program);
 	}
 
-	void Shader<GRAPHICS_LIB::OpenGL>::Unbind(uint32_t)
+	void Shader<"OpenGL">::Unbind(uint32_t)
 	{
 		glUseProgram(0);
 	}
+
+	Graphics::Shader* Shader<"OpenGL">::Create(Graphics::Context* ,const char* vertex_shader_path, const char* fragment_shader_path, const char* tess_control_shader_path, const char* tess_evaluation_shader_path, const char* geometry_shader_path)
+	{
+		return new Shader<"OpenGL">(vertex_shader_path, fragment_shader_path, tess_control_shader_path, tess_evaluation_shader_path, geometry_shader_path);
+	}
+
 }

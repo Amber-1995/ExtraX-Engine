@@ -2,8 +2,18 @@
 #ifndef EXTRAX_ASSERT_H
 #define EXTRAX_ASSERT_H
 
-#include <ExtraX/Common.h>
+
 #include <ExtraX/Log.h>
+
+#ifdef _WIN32
+	#define XX_DEBUGBREAK() __debugbreak()
+#else
+	#define XX_DEBUGBREAK()
+#endif
+
+#define XX_EXPAND_MACRO(x) x
+
+#define XX_STRINGIFY_MACRO(x) #x
 
 #ifndef EXTRAX_DISABLE_ASSERT
 

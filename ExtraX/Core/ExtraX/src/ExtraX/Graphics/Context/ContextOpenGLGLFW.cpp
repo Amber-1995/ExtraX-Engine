@@ -1,25 +1,13 @@
 #include <XXPch.h>
 #include <glad/glad.h>
+#include <GLFW/glfw3.h>
 #include <ExtraX/Assert.h>
 #include <ExtraX/Graphics/Window/WindowGLFW.h>
 #include "ContextOpenGLGLFW.h"
 
-
-namespace ExtraX::Graphics
-{
-	template<>
-	Context* Context::Create<GRAPHICS_LIB::OpenGL, WINDOW_LIB::GLFW>(Window* window)
-	{
-		Base::Window<WINDOW_LIB::GLFW>*w = dynamic_cast<Base::Window<WINDOW_LIB::GLFW>*>(window);
-		XX_CORE_ASSERT(w, "Window is not GLFW");
-
-		return new Base::Context<GRAPHICS_LIB::OpenGL, WINDOW_LIB::GLFW>(w);
-	}
-}
-
 namespace ExtraX::Graphics::Base
 {
-	Context<GRAPHICS_LIB::OpenGL, WINDOW_LIB::GLFW>::Context(Window<WINDOW_LIB::GLFW>* window)
+	Context<"OpenGL", "GLFW">::Context(Window<"GLFW">* window)
 	{
 		_window = window;
 
@@ -31,18 +19,26 @@ namespace ExtraX::Graphics::Base
 		glViewport(0, 0, _window->GetWidth(), _window->GetHeight());
 	}
 
-	Context<GRAPHICS_LIB::OpenGL, WINDOW_LIB::GLFW>::~Context()
+	Context<"OpenGL", "GLFW">::~Context()
 	{
-
 	}
 
-	void Context<GRAPHICS_LIB::OpenGL, WINDOW_LIB::GLFW>::SwapBuffers()
+	void Context<"OpenGL", "GLFW">::SwapBuffers()
 	{
 		glfwSwapBuffers(_window->GetHandle());
 	}
 
-	void Context<GRAPHICS_LIB::OpenGL, WINDOW_LIB::GLFW>::MakeCurrent()
+	void Context<"OpenGL", "GLFW">::MakeCurrent()
 	{
 		glfwMakeContextCurrent(_window->GetHandle());
+	}
+
+	Graphics::Context* Context<"OpenGL", "GLFW">::Create(Graphics::Window* window)
+	{
+		Window<"GLFW">* window_glfw = dynamic_cast<Window<"GLFW">*>(window);
+
+		XX_CORE_ASSERT(window_glfw, "window is not GLFW");
+
+		return new Context<"OpenGL", "GLFW">(window_glfw);
 	}
 }

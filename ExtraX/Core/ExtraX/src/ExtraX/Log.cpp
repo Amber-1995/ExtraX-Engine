@@ -1,4 +1,6 @@
 #include <XXPch.h>
+#include <spdlog/spdlog.h>
+#include <spdlog/sinks/stdout_color_sinks.h>
 #include "Log.h"
 
 namespace ExtraX

@@ -5,6 +5,7 @@
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include <ExtraX/Singleton.h>
+#undef CreateWindow
 
 namespace ExtraX
 {

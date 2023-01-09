@@ -14,5 +14,6 @@
 #include <algorithm>
 #include <bitset>
 #include <functional>
+#include <initializer_list>
 
 #endif // !EXTRAX_PCH_H

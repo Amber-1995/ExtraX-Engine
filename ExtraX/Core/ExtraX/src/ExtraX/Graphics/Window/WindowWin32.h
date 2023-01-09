@@ -21,7 +21,7 @@ namespace ExtraX::Graphics::Base
 	};
 
 	template<>
-	class Window<WINDOW_LIB::Win32> : public Graphics::Window
+	class Window<"Win32"> : public Graphics::Window
 	{
 	public:
 		struct Descriptor
@@ -85,6 +85,8 @@ namespace ExtraX::Graphics::Base
 		void SetSize(int width, int length) override;
 
 		void SetPosition(int x, int y) override;
+
+		static Graphics::Window* Create(int width, int height, const char* title);
 
 	};
 

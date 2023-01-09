@@ -33,9 +33,6 @@
     <ClCompile Include="src\ExtraX\Graphics\Shader\ShaderOpenGL.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="src\ExtraX\Initializer.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="src\ExtraX\Log.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -63,7 +60,13 @@
     <ClCompile Include="src\ExtraX\Graphics\Shader\ShaderBase.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="src\ExtraX\ExtraX.cpp">
+    <ClCompile Include="src\ExtraX\Graphics\Mesh\MeshBase.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ExtraX\Graphics\Mesh\MeshOpenGL.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ExtraX\StringLiteral.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -72,9 +75,6 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\ExtraX\Assert.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ExtraX\Common.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\ExtraX\Input.h">
@@ -143,13 +143,25 @@
     <ClInclude Include="src\ExtraX\Graphics\Context\ContextOpenGLGLFW.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="src\ExtraX\Initializer.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="src\Pch\XXPch.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="src\ExtraX\ExtraX.h">
+    <ClInclude Include="src\ExtraX\Graphics\Graphics.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ExtraX\Graphics\Mesh\MeshBase.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ExtraX\Graphics\Mesh\MeshOpenGL.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ExtraX\StringLiteral.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ExtraX\Graphics\InitOpenGLWin32.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ExtraX\Graphics\InitOpenGLGLFW.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

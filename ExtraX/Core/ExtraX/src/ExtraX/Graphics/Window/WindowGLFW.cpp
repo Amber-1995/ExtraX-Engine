@@ -2,20 +2,12 @@
 #include <ExtraX/Assert.h>
 #include <ExtraX/Input.h>
 #include <ExtraX/Event.h>
+#include <GLFW/glfw3.h>
 #include "WindowGLFW.h"
-
-namespace ExtraX::Graphics
-{
-	template<>
-	Window* Window::Create<WINDOW_LIB::GLFW>(int width, int height, const char* title)
-	{
-		return new Base::Window<WINDOW_LIB::GLFW>(width, height, title);
-	}
-}
 
 namespace ExtraX::Graphics::Base
 {
-	Window<WINDOW_LIB::GLFW>::Window(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share)
+	Window<"GLFW">::Window(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share)
 	{
 		
 		glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
@@ -214,78 +206,83 @@ namespace ExtraX::Graphics::Base
 		glfwSetScrollCallback(_window, scroll_callback);
 	}
 
-	Window<WINDOW_LIB::GLFW>::~Window()
+	Window<"GLFW">::~Window()
 	{
 		glfwDestroyWindow(_window);
 		glfwTerminate();
 	}
 
-	GLFWwindow* Window<WINDOW_LIB::GLFW>::GetHandle()
+	GLFWwindow* Window<"GLFW">::GetHandle()
 	{
 		return _window;
 	}
 
-	bool Window<WINDOW_LIB::GLFW>::ShouldClose()
+	bool Window<"GLFW">::ShouldClose()
 	{
 		return glfwWindowShouldClose(_window);
 
 	}
 
-	void Window<WINDOW_LIB::GLFW>::FrameBegin()
+	void Window<"GLFW">::FrameBegin()
 	{
 		glfwPollEvents();
 		EventInfo<EventType::FrameBegin> event_frame_begin;
 		EventManager::OnEvent(event_frame_begin);
 	}
 
-	void Window<WINDOW_LIB::GLFW>::FrameEnd()
+	void Window<"GLFW">::FrameEnd()
 	{
 		EventInfo<EventType::FrameEnd> event_frame_end;
 		EventManager::OnEvent(event_frame_end);
 	}
 
-	int Window<WINDOW_LIB::GLFW>::GetWidth()
+	int Window<"GLFW">::GetWidth()
 	{
 		int w, h;
 		glfwGetWindowSize(_window, &w, &h);
 		return w;
 	}
 
-	int Window<WINDOW_LIB::GLFW>::GetHeight()
+	int Window<"GLFW">::GetHeight()
 	{
 		int w, h;
 		glfwGetWindowSize(_window, &w, &h);
 		return h;
 	}
 
-	int Window<WINDOW_LIB::GLFW>::GetPositionX()
+	int Window<"GLFW">::GetPositionX()
 	{
 		int x, y;
 		glfwGetWindowPos(_window, &x, &y);
 		return x;
 	}
 
-	int Window<WINDOW_LIB::GLFW>::GetPositionY()
+	int Window<"GLFW">::GetPositionY()
 	{
 		int x, y;
 		glfwGetWindowPos(_window, &x, &y);
 		return y;
 	}
 
-	void Window<WINDOW_LIB::GLFW>::SetTitle(const char* title)
+	void Window<"GLFW">::SetTitle(const char* title)
 	{
 		glfwSetWindowTitle(_window, title);
 	}
 
-	void Window<WINDOW_LIB::GLFW>::SetSize(int width, int height)
+	void Window<"GLFW">::SetSize(int width, int height)
 	{
 		glfwSetWindowSize(_window, width, height);
 		const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 		glfwSetWindowPos(_window, (mode->width - width) / 2, (mode->height - height) / 2);
 	}
 
-	void Window<WINDOW_LIB::GLFW>::SetPosition(int x, int y)
+	void Window<"GLFW">::SetPosition(int x, int y)
 	{
 		glfwSetWindowPos(_window, x, y);
+	}
+
+	Graphics::Window* Window<"GLFW">::Create(int width, int height, const char* title)
+	{
+		return new Window<"GLFW">(width, height, title);
 	}
 }

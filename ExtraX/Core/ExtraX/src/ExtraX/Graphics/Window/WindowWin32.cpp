@@ -6,19 +6,9 @@
 #include <windowsx.h>
 #include "WindowWin32.h"
 
-
-namespace ExtraX::Graphics
-{
-	template<>
-	Window* Window::Create<WINDOW_LIB::Win32>(int width, int height, const char* title)
-	{
-		return new Base::Window<WINDOW_LIB::Win32>(width, height, title);
-	}
-}
-
 namespace ExtraX::Graphics::Base
 {
-	Window<WINDOW_LIB::Win32>::Window(WNDCLASSEX wcex, Descriptor descriptor)
+	Window<"Win32">::Window(WNDCLASSEX wcex, Descriptor descriptor)
 	{
 		_instance = wcex.hInstance;
 		_class_name = wcex.lpszClassName;
@@ -47,7 +37,7 @@ namespace ExtraX::Graphics::Base
 		UpdateWindow(_hwnd);
 	}
 
-	Window<WINDOW_LIB::Win32>::Window(int width, int height, const char* title)
+	Window<"Win32">::Window(int width, int height, const char* title)
 	{
 #ifdef UNICODE
 		std::wstring title_str(title, title + strlen(title));
@@ -178,30 +168,30 @@ namespace ExtraX::Graphics::Base
 		UpdateWindow(_hwnd);
 	}
 
-	Window<WINDOW_LIB::Win32>::~Window<WINDOW_LIB::Win32>()
+	Window<"Win32">::~Window()
 	{
 		UnregisterClass(_class_name.c_str(), _instance);
 
 		DestroyWindow(_hwnd);
 	}
 
-	HWND Window<WINDOW_LIB::Win32>::GetHandle()
+	HWND Window<"Win32">::GetHandle()
 	{
 		return _hwnd;
 	}
 
-	bool Window<WINDOW_LIB::Win32>::ShouldClose()
+	bool Window<"Win32">::ShouldClose()
 	{
 
 		return _should_close;
 	}
 
-	void Window<WINDOW_LIB::Win32>::FrameBegin()
+	void Window<"Win32">::FrameBegin()
 	{
 		MSG msg{};
 		while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
 		{
-			if (msg.message == WM_QUIT && msg.hwnd == _hwnd)
+			if (msg.message == WM_QUIT)
 			{
 				_should_close = true;
 			}
@@ -213,41 +203,41 @@ namespace ExtraX::Graphics::Base
 
 	}
 
-	void Window<WINDOW_LIB::Win32>::FrameEnd()
+	void Window<"Win32">::FrameEnd()
 	{
 		EventInfo<EventType::FrameEnd> event_frame_end;
 		EventManager::OnEvent(event_frame_end);
 	}
 
-	int Window<WINDOW_LIB::Win32>::GetWidth()
+	int Window<"Win32">::GetWidth()
 	{
 		RECT rect;
 		GetWindowRect(_hwnd, &rect);
 		return rect.right - rect.left - GetSystemMetrics(SM_CXDLGFRAME) * 2;
 	}
 
-	int Window<WINDOW_LIB::Win32>::GetHeight()
+	int Window<"Win32">::GetHeight()
 	{
 		RECT rect;
 		GetWindowRect(_hwnd, &rect);
 		return rect.bottom - rect.top - GetSystemMetrics(SM_CYDLGFRAME) * 2 - GetSystemMetrics(SM_CYCAPTION);
 	}
 
-	int Window<WINDOW_LIB::Win32>::GetPositionX()
+	int Window<"Win32">::GetPositionX()
 	{
 		RECT rect;
 		GetWindowRect(_hwnd, &rect);
 		return rect.left;
 	}
 
-	int Window<WINDOW_LIB::Win32>::GetPositionY()
+	int Window<"Win32">::GetPositionY()
 	{
 		RECT rect;
 		GetWindowRect(_hwnd, &rect);
 		return rect.top;
 	}
 
-	void Window<WINDOW_LIB::Win32>::SetTitle(const char* title)
+	void Window<"Win32">::SetTitle(const char* title)
 	{
 #ifdef UNICODE
 		std::wstring title_str(title, title + strlen(title));
@@ -258,7 +248,7 @@ namespace ExtraX::Graphics::Base
 		SetWindowText(_hwnd, title_str.c_str());
 	}
 
-	void Window<WINDOW_LIB::Win32>::SetSize(int width, int length)
+	void Window<"Win32">::SetSize(int width, int length)
 	{
 		MoveWindow
 		(
@@ -271,7 +261,7 @@ namespace ExtraX::Graphics::Base
 		);
 	}
 
-	void Window<WINDOW_LIB::Win32>::SetPosition(int x, int y)
+	void Window<"Win32">::SetPosition(int x, int y)
 	{
 		RECT rect;
 		GetWindowRect(_hwnd, &rect);
@@ -284,5 +274,10 @@ namespace ExtraX::Graphics::Base
 			rect.bottom - rect.top,
 			TRUE
 		);
+	}
+
+	Graphics::Window* Window<"Win32">::Create(int width, int height, const char* title)
+	{
+		return new Window<"Win32">(width, height, title);
 	}
 }
